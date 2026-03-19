@@ -752,6 +752,13 @@ h1,h2,h3,h4{margin:0}
 </footer>
 
 <script>
+// EmailJS init
+(function(){
+  if(typeof emailjs !== 'undefined'){
+    emailjs.init({ publicKey: 'EPzdpfTAqYgCg7vuO' });
+  }
+})();
+
 // Mobile menu
 const mobBtn = document.getElementById('mob-btn');
 const mobNav = document.getElementById('mob-nav');
@@ -776,12 +783,40 @@ const cn = document.getElementById('cn');
 svc.addEventListener('change', () => otherF.classList.toggle('hidden', svc.value !== 'other'));
 otherI.addEventListener('input', () => cn.textContent = otherI.value.length);
 
-// EmailJS — replace with your keys from emailjs.com
-const EJ_KEY  = 'YOUR_PUBLIC_KEY';
-const EJ_SVC  = 'YOUR_SERVICE_ID';
-const EJ_TMPL = 'YOUR_TEMPLATE_ID';
-if (typeof emailjs !== 'undefined' && EJ_KEY !== 'YOUR_PUBLIC_KEY') emailjs.init({ publicKey: EJ_KEY });
-
+// Contact form with EmailJS
 document.getElementById('cform').addEventListener('submit', async function(e) {
   e.preventDefault();
-  
+  const msgEl = document.getElementById('fmsg');
+  const btn = document.getElementById('sbtn');
+  msgEl.className = 'fmsg';
+
+  const p = {
+    name:    document.getElementById('fn').value,
+    email:   document.getElementById('fe').value,
+    phone:   document.getElementById('fp').value,
+    service: svc.value === 'other' ? 'Other: ' + otherI.value : svc.value,
+    message: document.getElementById('fm').value,
+  };
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    await emailjs.send('followcare_services', 'template_ukbj0st', p);
+    msgEl.textContent = "✅ Thank you! We'll be in touch within 24 hours.";
+    msgEl.className = 'fmsg ok';
+    this.reset();
+    otherF.classList.add('hidden');
+    cn.textContent = '0';
+  } catch(err) {
+    console.error('EmailJS error:', err);
+    const body = encodeURIComponent('Name: ' + p.name + '\nPhone: ' + p.phone + '\nService: ' + p.service + '\n\n' + p.message);
+    window.location.href = 'mailto:info@followcareservices.com?subject=Service Request from ' + p.name + '&body=' + body;
+  }
+
+  btn.textContent = 'Submit Request';
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
