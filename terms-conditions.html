@@ -123,48 +123,44 @@ h1,h2,h3,h4{margin:0}
 .contact-box {
     background: var(--dark-bg);
     border-radius: 1.25rem;
-    padding: 1.5rem; /* Reducimos de 2rem a 1.5rem para ganar espacio en los lados */
+    /* Reducimos el padding lateral al mínimo (1rem) para ganar espacio para el texto */
+    padding: 1.5rem 1rem; 
     margin-top: 3rem;
     color: #fff;
-    width: 100%; /* Asegura que se adapte al ancho disponible */
-    box-sizing: border-box; /* Crucial: incluye el padding dentro del cálculo del ancho */
-}
-
-.contact-box h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1.25rem;
-    padding: 0;
-    border: none;
+    /* Agrandamos el ancho al 95% para aprovechar casi todo el ancho del móvil */
+    width: 95%; 
+    max-width: 450px; /* Subimos el tope de 400px a 450px */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 .contact-row {
     display: flex;
-    align-items: center; /* Cambiamos de flex-start a center para mejor alineación visual */
-    gap: .75rem;
+    align-items: center;
+    gap: .5rem; /* Reducimos un poco el espacio entre el icono y el texto */
     margin-bottom: .875rem;
-    font-size: .85rem; /* Bajamos ligeramente de .9rem para ayudar al ajuste */
+    /* Bajamos la fuente a 0.8rem solo si el mail sigue saltando, 
+       esto es clave para que entre en una línea en pantallas chicas */
+    font-size: 0.8rem; 
     color: var(--accent);
-    word-break: break-all; /* Esto obliga al email a saltar de línea si no cabe en el ancho del celular */
 }
 
 .contact-row svg {
     width: 1rem;
     height: 1rem;
     fill: var(--primary);
-    flex-shrink: 0; /* Evita que el icono se aplaste cuando el texto es largo */
+    flex-shrink: 0;
 }
 
 .contact-row a, .contact-row span {
     color: var(--accent);
-    transition: color .2s;
     text-decoration: none;
-    flex: 1; /* Permite que el texto tome todo el espacio sobrante sin empujar el cuadro */
-}
-
-.contact-row a:hover {
-    color: var(--primary);
+    /* Evita que el texto salte de línea */
+    white-space: nowrap; 
+    /* Si aun así no cabe, esto hará que no rompa el cuadro */
+    overflow: hidden;
+    text-overflow: clip; 
 }
   </style>
 </head>
