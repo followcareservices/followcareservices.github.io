@@ -5,17 +5,19 @@
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "FollowCare Services",
-  "image": "https://www.followcareservices.com/logo-optimized.jpeg",
-  "@id": "https://www.followcareservices.com",
-  "url": "https://www.followcareservices.com",
+  "@id": "https://followcareservices.com",
+  "name": "FollowCare Services Pty Ltd",
+  "alternateName": "FollowCare",
+  "url": "https://followcareservices.com",
+  "image": "https://followcareservices.com/logo-optimized.jpeg",
+  "logo": "https://followcareservices.com/logo-optimized.jpeg",
   "telephone": "+61431116739",
+  "email": "info@followcareservices.com",
+  "description": "Registered NDIS provider in Adelaide, South Australia offering compassionate, person-centred disability support services including daily living support, community participation, household assistance, and respite care. Specialising in culturally safe services for CALD communities with interpreter support available.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Your Office Address",
     "addressLocality": "Adelaide",
     "addressRegion": "SA",
-    "postalCode": "5000",
     "addressCountry": "AU"
   },
   "geo": {
@@ -23,34 +25,45 @@
     "latitude": -34.9285,
     "longitude": 138.6007
   },
-  "description": "Professional disability support and home care provider in Adelaide, South Australia. Specializing in individualized support plans, community participation, and aged care assistance.",
-  "service": [
+  "openingHoursSpecification": [
     {
-      "@type": "Service",
-      "name": "Disability Support Services",
-      "description": "Comprehensive support for NDIS participants and individuals with disabilities to enhance independence and quality of life."
-    },
-    {
-      "@type": "Service",
-      "name": "In-Home Care & Support",
-      "description": "High-quality personal care and domestic assistance provided by qualified professionals with Certificate III in Individual Support."
-    },
-    {
-      "@type": "Service",
-      "name": "Community Access",
-      "description": "Assisting clients with community engagement, social activities, and transportation across Adelaide."
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
     }
   ],
   "areaServed": [
-    {
-      "@type": "City",
-      "name": "Adelaide"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "South Australia"
-    }
-  ]
+    { "@type": "City", "name": "Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Northern Suburbs Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Southern Suburbs Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Eastern Suburbs Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Western Suburbs Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Salisbury" },
+    { "@type": "AdministrativeArea", "name": "Playford" },
+    { "@type": "AdministrativeArea", "name": "Port Adelaide Enfield" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "NDIS Support Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Daily Living Support", "description": "Assistance with personal care, meal preparation, cleaning, and everyday activities." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Community Participation", "description": "Support to access social, recreational, and educational activities." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Household Assistance", "description": "Help with domestic tasks to maintain a safe and comfortable home." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Respite Care", "description": "Flexible support for families and carers who need time to rest and recharge." } }
+    ]
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/followcare",
+    "https://www.facebook.com/followcareservices/",
+    "https://www.instagram.com/followcareservices/"
+  ],
+  "knowsLanguage": ["en", "es"],
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "ABN",
+    "value": "88 692 742 153"
+  }
 }
 </script>
   <meta charset="utf-8">
