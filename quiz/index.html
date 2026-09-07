@@ -404,8 +404,22 @@
   /* ─── Contact screen ─── */
   .contact-screen {
     background: var(--bg);
-    padding: 28px 20px 40px;
+    padding: 0;
     flex-direction: column;
+    overflow: hidden;
+  }
+
+  .contact-scroll {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 24px 20px 16px;
+  }
+
+  .contact-footer {
+    padding: 12px 20px 20px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
   }
 
   .form-group {
@@ -957,46 +971,48 @@
   <!-- SCREEN 4: Contact details      -->
   <!-- ══════════════════════════════ -->
   <div class="screen contact-screen" id="screen-contact">
-    <div class="q-eyebrow" id="q4-eyebrow">Almost done!</div>
-    <h2 class="q-title" id="q4-title">Where should we send your care match?</h2>
-    <p class="q-sub" id="q4-sub">We'll call you within 24 hours with tailored options — no pressure, ever.</p>
+    <div class="contact-scroll">
+      <div class="q-eyebrow" id="q4-eyebrow">Almost done!</div>
+      <h2 class="q-title" id="q4-title">Where should we send your care match?</h2>
+      <p class="q-sub" id="q4-sub">We'll call you within 24 hours with tailored options — no pressure, ever.</p>
 
-    <div class="form-group">
-      <label class="form-label" for="inp-name" id="lbl-name">Your full name <span>*</span></label>
-      <input class="form-input" type="text" id="inp-name" placeholder="e.g. Maria García" autocomplete="name" required>
-    </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-name" id="lbl-name">Your full name <span>*</span></label>
+        <input class="form-input" type="text" id="inp-name" placeholder="e.g. Maria García" autocomplete="name" required>
+      </div>
 
-    <div class="form-group">
-      <label class="form-label" for="inp-phone" id="lbl-phone">Mobile number <span>*</span></label>
-      <input class="form-input" type="tel" id="inp-phone" placeholder="e.g. 04XX XXX XXX" autocomplete="tel" required>
-    </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-phone" id="lbl-phone">Mobile number <span>*</span></label>
+        <input class="form-input" type="tel" id="inp-phone" placeholder="e.g. 04XX XXX XXX" autocomplete="tel" required>
+      </div>
 
-    <div class="form-group">
-      <label class="form-label" for="inp-email" id="lbl-email">Email (optional)</label>
-      <input class="form-input" type="email" id="inp-email" placeholder="your@email.com" autocomplete="email">
-    </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-email" id="lbl-email">Email (optional)</label>
+        <input class="form-input" type="email" id="inp-email" placeholder="your@email.com" autocomplete="email">
+      </div>
 
-    <div class="form-group">
-      <label class="form-label" id="lbl-lang">Preferred language for your call</label>
-      <div class="lang-pill-wrap">
-        <div class="lang-pill selected" onclick="selectLang(this,'English')">🇦🇺 English</div>
-        <div class="lang-pill" onclick="selectLang(this,'Spanish')">🇪🇸 Español</div>
-        <div class="lang-pill" onclick="selectLang(this,'Other')">🌏 Other</div>
+      <div class="form-group">
+        <label class="form-label" id="lbl-lang">Preferred language for your call</label>
+        <div class="lang-pill-wrap">
+          <div class="lang-pill selected" onclick="selectLang(this,'English')">🇦🇺 English</div>
+          <div class="lang-pill" onclick="selectLang(this,'Spanish')">🇪🇸 Español</div>
+          <div class="lang-pill" onclick="selectLang(this,'Other')">🌏 Other</div>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <div class="consent-check" id="consentBox" onclick="toggleConsent()"></div>
+        <p class="consent-text" id="consent-txt">
+          I agree for FollowCare Services to contact me about NDIS support options. My information is kept private and will never be shared. <a href="https://followcareservices.com/privacy-policy" target="_blank">Privacy Policy</a>
+        </p>
       </div>
     </div>
 
-    <div class="consent-row">
-      <div class="consent-check" id="consentBox" onclick="toggleConsent()"></div>
-      <p class="consent-text" id="consent-txt">
-        I agree for FollowCare Services to contact me about NDIS support options. My information is kept private and will never be shared. <a href="https://followcareservices.com/privacy-policy" target="_blank">Privacy Policy</a>
-      </p>
+    <div class="contact-footer">
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">🎯 Get My Care Match</button>
+      <div class="privacy-note" style="margin-top:10px;">🔒 <span id="privacy-note-txt">Secure · Private · No spam, ever</span></div>
+      <span class="back-link" style="display:block;text-align:center;margin-top:10px;" onclick="goBack('screen-q3')">← Back</span>
     </div>
-
-    <button class="submit-btn" id="submitBtn" onclick="submitForm()">🎯 Get My Care Match</button>
-
-    <div class="privacy-note">🔒 <span id="privacy-note-txt">Secure · Private · No spam, ever</span></div>
-
-    <span class="back-link" onclick="goBack('screen-q3')">← Back</span>
   </div>
 
   <!-- ══════════════════════════════ -->
