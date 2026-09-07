@@ -1285,7 +1285,8 @@
       const fd = new FormData();
       fd.append('name', name);
       fd.append('phone', phone);
-      fd.append('email', email || '(not provided)');
+      if (email) fd.append('email', email);
+      fd.append('email_optional', email || 'not provided');
       fd.append('who_for', answers.q1 || '—');
       fd.append('support_type', answers.q2 || '—');
       fd.append('ndis_stage', answers.q3 || '—');
