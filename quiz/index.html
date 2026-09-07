@@ -1262,9 +1262,10 @@
   }
 
   // ─── Submit ───
-  function submitForm() {
+  async function submitForm() {
     const name = document.getElementById('inp-name').value.trim();
     const phone = document.getElementById('inp-phone').value.trim();
+    const email = document.getElementById('inp-email').value.trim();
     if (!name || !phone) {
       alert(activeLang === 'es' ? 'Por favor ingresa tu nombre y teléfono.' : 'Please enter your name and phone number.');
       return;
@@ -1272,6 +1273,31 @@
     if (!answers.consent) {
       alert(activeLang === 'es' ? 'Por favor acepta los términos para continuar.' : 'Please agree to be contacted to continue.');
       return;
+    }
+
+    // Disable button to prevent double submit
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    // Send to Formspree
+    try {
+      await fetch('https://formspree.io/f/xkjnqwya', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          email: email || '(not provided)',
+          who_for: answers.q1 || '—',
+          support_type: answers.q2 || '—',
+          ndis_stage: answers.q3 || '—',
+          preferred_language: answers.lang,
+          source: 'FollowCare Quiz — followcareservices.com/quiz'
+        })
+      });
+    } catch (e) {
+      // Silently continue — don't block the user if network fails
     }
 
     // Build summary
@@ -1286,9 +1312,6 @@
     ];
     summary.innerHTML = `<div class="thanks-summary-title">Your Care Match Summary</div>` +
       rows.map(([l, v]) => `<div class="summary-row"><span class="summary-label">${l}</span><span class="summary-value">${v}</span></div>`).join('');
-
-    // In production: POST to backend/Zapier/etc.
-    // console.log('Lead:', { name, phone, email: document.getElementById('inp-email').value, ...answers });
 
     goTo('screen-thanks');
   }
