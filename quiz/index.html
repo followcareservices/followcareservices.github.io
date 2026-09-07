@@ -1282,22 +1282,24 @@
 
     // Send to Formspree
     try {
-      await fetch('https://formspree.io/f/xkjnqwya', {
+      const fd = new FormData();
+      fd.append('name', name);
+      fd.append('phone', phone);
+      fd.append('email', email || '(not provided)');
+      fd.append('who_for', answers.q1 || '—');
+      fd.append('support_type', answers.q2 || '—');
+      fd.append('ndis_stage', answers.q3 || '—');
+      fd.append('preferred_language', answers.lang);
+      fd.append('_subject', 'New lead from FollowCare Quiz');
+      const res = await fetch('https://formspree.io/f/xkjnqwya', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          phone,
-          email: email || '(not provided)',
-          who_for: answers.q1 || '—',
-          support_type: answers.q2 || '—',
-          ndis_stage: answers.q3 || '—',
-          preferred_language: answers.lang,
-          source: 'FollowCare Quiz — followcareservices.com/quiz'
-        })
+        headers: { 'Accept': 'application/json' },
+        body: fd
       });
+      const data = await res.json();
+      console.log('Formspree response:', res.status, JSON.stringify(data));
     } catch (e) {
-      // Silently continue — don't block the user if network fails
+      console.error('Formspree error:', e);
     }
 
     // Build summary
